@@ -43,18 +43,24 @@ Enable the storage driver by adding the key `dospaces` to Imager's `storages` co
 
     'storages' => ['dospaces'],
 
-Here's an example config, note that the endpoint has to be a complete URL with scheme:
+Here's an example config, note that the endpoint has to be a complete URL with scheme, and as always you need to make sure that `imagerUrl` is pointed to the right location:
 
-    'dospaces'  => [
-        'endpoint' => 'https://ams3.digitaloceanspaces.com',
-        'accessKey' => 'MYACCESSKEY',
-        'secretAccessKey' => 'MYSECRETKEY',
-        'region' => 'ams3',
-        'bucket' => 'imager-test-bucket',
-        'folder' => 'transforms',
-        'requestHeaders' => array(),
+    'imagerUrl' => 'https://imager-test-bucket.ams3.digitaloceanspaces.com/transforms/',
+    'storages' => ['dospaces'],
+    'storageConfig' => [
+        'dospaces'  => [
+            'endpoint' => 'https://ams3.digitaloceanspaces.com',
+            'accessKey' => 'MYACCESSKEY',
+            'secretAccessKey' => 'MYSECRETKEY',
+            'region' => 'ams3',
+            'bucket' => 'imager-test-bucket',
+            'folder' => 'transforms',
+            'requestHeaders' => array(),
+        ]
     ],
-
+    
+Also remember to always empty your Imager transforms cache when adding or removing external storages, as the transforms won't be uploaded if the transform already exists in the cache.
+ 
 
 Price, license and support
 ---
